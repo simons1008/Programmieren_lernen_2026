@@ -7,7 +7,7 @@
 untere = 1
 
 # obere Grenze
-obere = 1000
+obere = 100
 
 # Anzahl der Versuche
 versuche = 0
