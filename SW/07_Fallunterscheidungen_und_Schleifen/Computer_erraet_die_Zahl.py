@@ -7,7 +7,7 @@
 untere = 1
 
 # obere Grenze
-obere = 100
+obere = 1000
 
 # Anzahl der Versuche
 versuche = 0
@@ -26,6 +26,9 @@ while benutzereingabe != "e":
     # Zahl raten
     x = (untere + obere)//2
 
+    # Versuche hochzählen
+    versuche += 1
+
     # Zahl ausgeben
     print("Der Computer rät ", x)
 
@@ -34,13 +37,9 @@ while benutzereingabe != "e":
 
     # Benutzereingabe bewerten
     if benutzereingabe == "k":
-        # Versuche hochzählen
-        versuche += 1
         # obere Grenze verkleinern
         obere = max(untere, x - 1)
     elif benutzereingabe == "g":
-        # Versuche hochzählen
-        versuche += 1
         # untere Grenze vergrößern
         untere = min(obere, x + 1)
 
