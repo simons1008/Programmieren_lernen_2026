@@ -19,7 +19,7 @@ def ausgabe2b(wert1: int, wert2: int = 15):
 # Aufruf der Funktion
 ausgabe2b(5)
 
-# Funktion mit 1 Input
+# Funktion mit 1 Input und 1 Output
 def verdoppeln(wert: int) -> int:
     return wert * 2
 # Aufruf der Funktion
