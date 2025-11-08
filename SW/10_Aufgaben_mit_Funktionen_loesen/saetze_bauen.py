@@ -22,7 +22,8 @@ def bau_den_satz(subjekt: list[str], prädikat: list[str], \
     return mein_satz	
 
 # Funktion aufrufen
-for i in range(5): 
+for i in range(5):
+    # Satz bauen
     mein_satz = bau_den_satz(subjekt, prädikat, objekt)
     # Ergebnis drucken
     print(mein_satz)
