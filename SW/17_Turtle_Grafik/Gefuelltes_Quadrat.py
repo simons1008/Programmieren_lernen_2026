@@ -17,7 +17,7 @@ wn.setup(800, 400)
 wn.setworldcoordinates(0, 0, 22, 11)
 
 # Farbe setzen
-t.color('orange')
+t.color("orange")
 
 # Position setzen
 t.goto(11, 5)
@@ -26,7 +26,7 @@ t.goto(11, 5)
 t.begin_fill()
 # Quadrat zeichnen und füllen
 for i in range(4):
-    # Vorwärts 11 Schritte
+    # Vorwärts 5 Schritte
     t.forward(5)
     # Rechtsherum drehen um 90 Grad
     t.right(90)
