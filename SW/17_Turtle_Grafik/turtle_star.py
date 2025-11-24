@@ -18,9 +18,9 @@ begin_fill()
 
 # Loop
 while True:
-    # 200 Schritte vorwärts
+    # Schritte vorwärts
     forward(200)
-    # Linksdrehung um 170°
+    # Linksdrehung in Grad
     left(170)
     # wenn Turtle wieder in Home-Postion
     if abs(pos()) < 1:
