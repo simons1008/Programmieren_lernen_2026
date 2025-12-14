@@ -67,12 +67,12 @@ class Maze:
         self.wn.tracer(1)
 
     def draw_box(self, x, y, color):
-        self.t.up()
+        self.t.penup()
         self.t.goto(x, y)
         self.t.color(color)
         self.t.fillcolor(color)
         self.t.setheading(90)
-        self.t.down()
+        self.t.pendown()
         self.t.begin_fill()
         for i in range(4):
             self.t.forward(1)
@@ -80,7 +80,7 @@ class Maze:
         self.t.end_fill()
 
     def move_turtle(self, x, y):
-        #self.t.up()
+        #self.t.penup()
         x += 0.5
         y += 0.5
         self.t.setheading(self.t.towards(x, y))
@@ -134,10 +134,10 @@ class Maze:
 
 def search_from(maze, start_row, start_col):
     # Spur bis zum Start verbergen
-    maze.t.up()
+    maze.t.penup()
     maze.update_position(start_row, start_col, BLANK)
     # Spur einschalten
-    maze.t.down()
+    maze.t.pendown()
     heading = maze.init_search()
 
     # Drehungen zählen

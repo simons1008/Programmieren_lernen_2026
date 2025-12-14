@@ -52,12 +52,12 @@ class Maze:
         return (self.rows_in_maze - 1) - row
     # Zeichne ein ausgefülltes Rechteck
     def draw_box(self, x, y, color):
-        self.t.up() # Stift hoch
+        self.t.penup() # Stift hoch
         self.t.goto(x, y)
         self.t.color(color)
         self.t.fillcolor(color)
         self.t.setheading(90)
-        self.t.down() # Stift runter
+        self.t.pendown() # Stift runter
         self.t.begin_fill()
         # Rechteck zeichnen und füllen
         for i in range(4):
@@ -134,7 +134,7 @@ def search_from(maze, start_row, start_col):
     # Schildkröte auf die Startposition setzen
     maze.update_position(start_row, start_col, BLANK)
     # Spur einschalten
-    maze.t.down()
+    maze.t.pendown()
     # Richtung festlegen
     heading = maze.init_search()
     print(heading)
@@ -177,7 +177,7 @@ def search_from(maze, start_row, start_col):
 my_maze = Maze("maze3.txt")
 # Irrgarten zeichnen
 my_maze.draw_maze()
-my_maze.t.up() # Stift hoch
+my_maze.t.penup() # Stift hoch
 # Schildkröte in Home-Position
 my_maze.t.home()
 # Suche den Weg vom Start zum Ausgang
