@@ -14,6 +14,7 @@ EXIT = "E"
 # Richtungs-Eigenschaften
 right_of  = {"up": "right", "down": "left" , "left": "up"  , "right": "down"}
 left_of   = {"up": "left" , "down": "right", "left": "down", "right": "up"  }
+angle_of  = {"up": 90     , "down": 270    , "left": 180   , "right": 0     }
 delta_row = {"up": -1     , "down": 1      , "left": 0     , "right": 0     }
 delta_col = {"up": 0      , "down": 0      , "left": -1    , "right": 1     }
 # Irrgarten-Klasse 
@@ -98,12 +99,11 @@ class Maze:
             or col == 0
             or col == self.columns_in_maze - 1
         )
-    # Geschwindigkeit und Richtung der Schildkröte, Richtung des Roboters festlegen
-    def init_search(self):
+    # Geschwindigkeit und Richtung der Schildkröte einstellen
+    def init_search(self, heading):
         self.t.speed(3)
-        self.t.setheading(90)
-        heading = "up"
-        return heading
+        self.t.pendown() # Stift runter
+        self.t.setheading(angle_of[heading])
     # schau nach vorne
     def look_forward(self, start_row, start_col, heading):
         # im Exit nicht nach vorne schauen!
@@ -133,11 +133,11 @@ class Maze:
 def search_from(maze, start_row, start_col):
     # Schildkröte auf die Startposition setzen
     maze.update_position(start_row, start_col, BLANK)
-    # Spur einschalten
-    maze.t.pendown()
     # Richtung festlegen
-    heading = maze.init_search()
+    heading = "up"
     print(heading)
+    # Schildkröte einstellen
+    maze.init_search(heading)
     # cmd initialisieren
     cmd = ""
     # Solange wiederholen, bis Benutzer "e" eingibt
