@@ -21,6 +21,7 @@ EXIT = "E"
 # heading properties
 right_of  = {"up": "right", "down": "left" , "left": "up"  , "right": "down"}
 left_of   = {"up": "left" , "down": "right", "left": "down", "right": "up"  }
+angle_of  = {"up": 90     , "down": 270    , "left": 180   , "right": 0     }
 delta_row = {"up": -1     , "down": 1      , "left": 0     , "right": 0     }
 delta_col = {"up": 0      , "down": 0      , "left": -1    , "right": 1     }
 
@@ -52,20 +53,6 @@ class Maze:
         # rows from top to bottom <-> y coordinates from bottom to top 
         return (self.rows_in_maze - 1) - row
 
-    def draw_maze(self):
-        self.t.speed(10)
-        self.wn.tracer(0)
-        for row in range(self.rows_in_maze):
-            for col in range(self.columns_in_maze):
-                if self.maze_list[row][col] == OBSTACLE:
-                    self.draw_box(
-                        col, self.from_bottom(row), "orange"
-                    )
-        self.t.color("black")
-        self.t.fillcolor("blue")
-        self.wn.update()
-        self.wn.tracer(1)
-
     def draw_box(self, x, y, color):
         self.t.penup()
         self.t.goto(x, y)
@@ -79,8 +66,18 @@ class Maze:
             self.t.right(90)
         self.t.end_fill()
 
+    def draw_maze(self):
+        self.wn.tracer(0)
+        for row in range(self.rows_in_maze):
+            for col in range(self.columns_in_maze):
+                if self.maze_list[row][col] == OBSTACLE:
+                    self.draw_box(col, self.from_bottom(row), "orange")
+        self.t.color("black")
+        self.t.fillcolor("blue")
+        self.wn.update()
+        self.wn.tracer(1)
+
     def move_turtle(self, x, y):
-        #self.t.penup()
         x += 0.5
         y += 0.5
         self.t.setheading(self.t.towards(x, y))
@@ -100,12 +97,11 @@ class Maze:
             or col == self.columns_in_maze - 1
         )
 
-    def init_search(self):
+    def init_search(self, heading):
         self.t.speed(3)
-        self.t.setheading(90)
-        heading = "up"
+        self.t.pendown() # Stift runter
+        self.t.setheading(angle_of[heading])
         time.sleep(1)
-        return heading
 
     def look_forward(self, start_row, start_col, heading):
         # im Exit nicht nach vorne schauen!
@@ -133,12 +129,13 @@ class Maze:
         return left_of[heading]
 
 def search_from(maze, start_row, start_col):
-    # Spur bis zum Start verbergen
-    maze.t.penup()
+    # Schildkröte auf die Startposition setzen
     maze.update_position(start_row, start_col, BLANK)
-    # Spur einschalten
-    maze.t.pendown()
-    heading = maze.init_search()
+    # Richtung festlegen
+    heading = "up"
+    print(heading)
+    # Schildkröte einstellen
+    maze.init_search(heading)
 
     # solange vorne frei ist
     while maze.look_forward(start_row, start_col, heading) == BLANK:
@@ -181,9 +178,9 @@ def search_from(maze, start_row, start_col):
     print("Exit found!")
     print(turn_count, "Drehungen")
 
-
 my_maze = Maze("maze3.txt")
 my_maze.draw_maze()
+my_maze.t.penup() # Stift hoch
 my_maze.t.home()
 search_from(my_maze, my_maze.start_row, my_maze.start_col)
 
