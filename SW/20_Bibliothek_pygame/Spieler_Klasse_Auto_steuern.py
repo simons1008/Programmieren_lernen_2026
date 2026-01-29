@@ -44,10 +44,6 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom < SCREEN_HEIGHT:
             if pressed_keys[pygame.K_DOWN]:
                 self.rect.move_ip(0, 5)
-    # Player zeichnen            
-    def draw(self, surface):
-        # Blocktransfer: source = self.image, destination = self.rect
-        surface.blit(self.image, self.rect)      
 # Instanz erzeugen
 P1 = Player()
 #Game Loop
@@ -64,7 +60,8 @@ while True:
     # Grafik-Fenster auswischen
     screen.fill(WHITE)
     # Player zeichnen
-    P1.draw(screen)
+    # Blocktransfer: source = P1.image, destination = P1.rect
+    screen.blit(P1.image, P1.rect)
     # Grafik-Fenster aktualisieren
     pygame.display.update()
     # Frames per second begrenzen

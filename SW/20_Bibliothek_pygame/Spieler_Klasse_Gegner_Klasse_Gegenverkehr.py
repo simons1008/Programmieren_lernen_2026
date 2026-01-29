@@ -40,10 +40,6 @@ class Player(pygame.sprite.Sprite):
         if self.rect.right < SCREEN_WIDTH:        
             if pressed_keys[pygame.K_RIGHT]:
                 self.rect.move_ip(5, 0)
-    # Player zeichnen            
-    def draw(self, surface):
-        # Blocktransfer: source = self.image, destination = self.rect
-        surface.blit(self.image, self.rect)      
 # Gegner-Klasse
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
@@ -63,10 +59,6 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.top = 0
             # zufällige Anfangsposition
             self.rect.center = (random.randint(40, SCREEN_WIDTH - 40), 0)
-    # Gegner zeichnen 
-    def draw(self, surface):
-        # Blocktransfer: source = self.image, destination = self.rect
-        surface.blit(self.image, self.rect)      
 # Instanzen erzeugen
 P1 = Player()
 E1 = Enemy()
@@ -86,9 +78,11 @@ while True:
     # Grafik-Fenster auswischen
     screen.fill(WHITE)
     # Player zeichnen
-    P1.draw(screen)
+    # Blocktransfer: source = P1.image, destination = P1.rect
+    screen.blit(P1.image, P1.rect)
     # Enemy zeichnen
-    E1.draw(screen)
+    # Blocktransfer: source = E1.image, destination = E1.rect
+    screen.blit(E1.image, E1.rect)
     # Grafik-Fenster aktualisieren
     pygame.display.update()
     # Frames per second begrenzen
