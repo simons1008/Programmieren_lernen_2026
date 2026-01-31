@@ -65,10 +65,6 @@ class Player(pygame.sprite.Sprite):
         if (self.direction == "left") and (self.rect.right < 120):
             self.score += 1
             self.direction = "right"
-    # score zeichnen
-    def draw_score(self, surface):
-        my_score = font_small.render(str(self.score), True, BLACK)
-        surface.blit(my_score, (10,10))
 # Gegner-Klasse
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
@@ -123,7 +119,8 @@ while True:
     # Straße zeichnen
     screen.blit(background, (0,0))
     # score zeichnen
-    P1.draw_score(screen)
+    my_score = font_small.render(str(P1.score), True, BLACK)
+    screen.blit(my_score, (10,10))
     # Spieler und Gegner bewegen und zeichnen
     for entity in all_sprites:
         # Spieler und Gegner bewegen
